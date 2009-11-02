@@ -140,8 +140,11 @@ class ReadMail(Mail):
 class WriteMail(Mail):
     def send(self):
         addresses = []
-        for header in ("To", "Cc"):
-            addresses.append(email.utils.parseaddr(self.decode(header))[1])
+        for header_name in ("To", "Cc", "Bcc"):
+            for header in self.get_all(header_name, []):
+                addresses.append(email.utils.parseaddr(decode(header))[1])
+
+        del self["Bcc"]
 
         name, address = email.utils.parseaddr(u"Guillaume Ayoub <guillaume.ayoub@kozea.fr>".encode("utf-8"))
         if name:
