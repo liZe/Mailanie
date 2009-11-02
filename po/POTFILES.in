@@ -1,0 +1,9 @@
+[encoding: UTF-8]
+mailanie.desktop.in
+mailanie/ui/about.py
+mailanie/ui/addressbook.py
+mailanie/ui/folder.py
+mailanie/ui/__init__.py
+mailanie/ui/maildir.py
+mailanie/ui/mail.py
+mailanie/ui/preferences.py

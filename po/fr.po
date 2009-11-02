@@ -1,0 +1,300 @@
+# Mailany - Cute Mailbox Explorator
+# Copyright (C) 2009 Guillaume Ayoub <guillaume.ayoub@kozea.fr>
+# This file is distributed under the same license as the Mailanie package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-10-24 12:17+0200\n"
+"PO-Revision-Date: 2009-10-24 12:24+0200\n"
+"Last-Translator: Guillaume Ayoub <guillaume.ayoub@kozea.fr>\n"
+"Language-Team: French <fr@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../mailanie.desktop.in.h:1
+msgid "Browse your Mailbox"
+msgstr "Explorer votre boîte aux lettres"
+
+#: ../mailanie.desktop.in.h:2
+msgid "Mailbox Browser"
+msgstr "Explorateur de boîtes aux lettres"
+
+#: ../mailanie/ui/about.py:21
+msgid ""
+"Mailanie is free software; you can redistribute it and/or modify it under\n"
+"the terms of the GNU General Public License as published by the Free\n"
+"Software Foundation; either version 3 of the License, or (at your option)\n"
+"any later version.\n"
+"\n"
+"Mailanie is distributed in the hope that it will be useful, but WITHOUT\n"
+"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or\n"
+"FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for\n"
+"more details.\n"
+"\n"
+"You should have received a copy of the GNU General Public License along\n"
+"with Mailanie; if not, write to the Free Software Foundation, Inc., 51\n"
+"Franklin St, Fifth Floor, Boston, MA 02110-1301 USA."
+msgstr ""
+"Mailanie est un logiciel libre ; vous pouvez le redistribuer et/ou le\n"
+"modifier selon les termes de la Licence Publique Générale GNU publiée par la\n"
+"Free Software Foundation ; soit la version 2 de la license, soit (à votre\n"
+"discrétion) toute version ultérieure.\n"
+"\n"
+"Mailanie est distribué dans l'espoir qu'il puisse vous être utile, mais SANS\n"
+"AUCUNE GARANTIE ; sans même de garantie de VALEUR MARCHANDE ou d'ADÉQUATION\n"
+"À UN BESOIN PARTICULIER. Consultez la Licence Publique Générale GNU pour plus\n"
+"de détails.\n"
+"\n"
+"Vous devez avoir reçu une copie de la Licence Publique Générale GNU en même\n"
+"temps que Mailanie ; si ce n'est pas le cas, écrivez à la Free Software\n"
+"Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA."
+
+#: ../mailanie/ui/about.py:44
+msgid "Small and Cute Mailbox Explorer"
+msgstr "Petit et mignon explorateur de boîtes aux lettres"
+
+#. Note for translators:
+#. Please translate "translator-credits" in
+#. "Your Name (Nick) <your.adress@something.org>"
+#: ../mailanie/ui/about.py:52
+msgid "translator-credits"
+msgstr "Guillaume Ayoub <guillaume.ayoub@kozea.fr>"
+
+#: ../mailanie/ui/addressbook.py:31 ../mailanie/ui/__init__.py:48
+#: ../mailanie/ui/preferences.py:42
+msgid "Address Book"
+msgstr "Carnet d’adresses"
+
+#: ../mailanie/ui/folder.py:155
+#, python-format
+msgid "Loading %s"
+msgstr "Chargement de %s"
+
+#: ../mailanie/ui/folder.py:207
+#, python-format
+msgid "Deleting Mails in %s"
+msgstr "Suppression des messages dans %s"
+
+#: ../mailanie/ui/folder.py:276 ../mailanie/ui/mail.py:154
+#: ../mailanie/ui/mail.py:324 ../mailanie/ui/mail.py:332
+msgid "Untitled"
+msgstr "Sans titre"
+
+#: ../mailanie/ui/__init__.py:30 ../mailanie/ui/preferences.py:37
+msgid "Mail"
+msgstr "Courriel"
+
+#: ../mailanie/ui/__init__.py:31
+msgid "_Forward Mail"
+msgstr "_Transmettre le message"
+
+#: ../mailanie/ui/__init__.py:32
+msgid "_Reply Mail"
+msgstr "_Répondre au message"
+
+#: ../mailanie/ui/__init__.py:33
+msgid "Reply Mail to _All"
+msgstr "Ré_pondre à tous"
+
+#: ../mailanie/ui/__init__.py:34
+msgid "_Send Mail"
+msgstr "Envoyer le me_ssage"
+
+#: ../mailanie/ui/__init__.py:35
+msgid "_New Mail"
+msgstr "_Nouveau message"
+
+#: ../mailanie/ui/__init__.py:36
+msgid "_Refresh"
+msgstr "_Rafraîchir"
+
+#: ../mailanie/ui/__init__.py:37
+msgid "Folder"
+msgstr "Dossier"
+
+#: ../mailanie/ui/__init__.py:38
+msgid "Inbox"
+msgstr "Courrier entrant"
+
+#: ../mailanie/ui/__init__.py:39
+msgid "Read Mail"
+msgstr "Message lu"
+
+#: ../mailanie/ui/__init__.py:40
+msgid "Unread Mail"
+msgstr "Message non-lu"
+
+#: ../mailanie/ui/__init__.py:41 ../mailanie/ui/preferences.py:68
+msgid "Sent Mail"
+msgstr "Courrier envoyé"
+
+#: ../mailanie/ui/__init__.py:42
+msgid "Replied Mail"
+msgstr "Courrier répondu"
+
+#: ../mailanie/ui/__init__.py:43
+msgid "Forwarded Mail"
+msgstr "Courrier transmis"
+
+#: ../mailanie/ui/__init__.py:44
+msgid "Junk"
+msgstr "Pourriel"
+
+#: ../mailanie/ui/__init__.py:45 ../mailanie/ui/preferences.py:65
+msgid "Draft"
+msgstr "Brouillon"
+
+#: ../mailanie/ui/__init__.py:46
+msgid "Trash"
+msgstr "Corbeille"
+
+#: ../mailanie/ui/__init__.py:47
+msgid "Delete"
+msgstr "Supprimer"
+
+#: ../mailanie/ui/__init__.py:49
+msgid "Search"
+msgstr "Rechercher"
+
+#: ../mailanie/ui/__init__.py:50
+msgid "Clear"
+msgstr "Nettoyer"
+
+#: ../mailanie/ui/__init__.py:86
+msgid "Write a New Mail"
+msgstr "Écrire un nouveau message"
+
+#: ../mailanie/ui/__init__.py:89
+msgid "Refresh the Mail Boxes"
+msgstr "Mettre à jour les boîtes aux lettres"
+
+#: ../mailanie/ui/__init__.py:92
+msgid "Delete Trash Mails"
+msgstr "Supprimer les messages mis à la corbeille"
+
+#: ../mailanie/ui/__init__.py:95
+msgid "Open Address Book"
+msgstr "Ouvrir le carnet d’adresses"
+
+#: ../mailanie/ui/__init__.py:98
+msgid "Choose Preferences"
+msgstr "Changer les préférences"
+
+#: ../mailanie/ui/__init__.py:101
+msgid "About Mailanie"
+msgstr "À propos de Mailanie"
+
+#: ../mailanie/ui/__init__.py:104
+msgid "Quit Mailanie"
+msgstr "Quitter Mailanie"
+
+#: ../mailanie/ui/__init__.py:271
+#, python-format
+msgid "%i new mail in %s"
+msgid_plural "%i new mails in %s"
+msgstr[0] "%i nouveau message dans %s"
+msgstr[1] "%i nouveaux messages dans %s"
+
+#: ../mailanie/ui/mail.py:24
+msgid "Subject"
+msgstr "Sujet"
+
+#: ../mailanie/ui/mail.py:24
+msgid "From"
+msgstr "De"
+
+#: ../mailanie/ui/mail.py:24
+msgid "To"
+msgstr "À"
+
+#: ../mailanie/ui/mail.py:24
+msgid "Cc"
+msgstr "Cc"
+
+#: ../mailanie/ui/mail.py:24
+msgid "Bcc"
+msgstr "Bcc"
+
+#: ../mailanie/ui/preferences.py:23
+msgid "Mailanie Preferences"
+msgstr "Préférences de Mailanie"
+
+#: ../mailanie/ui/preferences.py:35 ../mailanie/ui/preferences.py:50
+msgid "Folders"
+msgstr "Dossiers"
+
+#: ../mailanie/ui/preferences.py:40
+msgid "Mailbox"
+msgstr "Boîte aux lettres"
+
+#: ../mailanie/ui/preferences.py:45
+msgid "Address book"
+msgstr "Carnet d’adresses"
+
+#: ../mailanie/ui/preferences.py:47
+msgid "Cache"
+msgstr "Cache"
+
+#: ../mailanie/ui/preferences.py:53
+msgid "Attached files"
+msgstr "Pièces jointes"
+
+#: ../mailanie/ui/preferences.py:56
+msgid "Mailboxes"
+msgstr "Boîtes aux lettres"
+
+#. TODO: update combo_list when maildir is updated
+#: ../mailanie/ui/preferences.py:59
+msgid "None"
+msgstr "Aucune"
+
+#: ../mailanie/ui/preferences.py:62
+msgid "Default Mailboxes"
+msgstr "Boîtes aux lettres par défaut"
+
+#: ../mailanie/ui/preferences.py:71
+msgid "SMTP Server"
+msgstr "Serveur SMTP"
+
+#. TODO: update combo_list when maildir is updated
+#: ../mailanie/ui/preferences.py:74 ../mailanie/ui/preferences.py:77
+msgid "Server"
+msgstr "Serveur"
+
+#: ../mailanie/ui/preferences.py:80
+msgid "Port"
+msgstr "Port"
+
+#: ../mailanie/ui/preferences.py:83
+msgid "Use SSL"
+msgstr "Utiliser SSL"
+
+#: ../mailanie/ui/preferences.py:85
+msgid "User"
+msgstr "Utilisateur"
+
+#: ../mailanie/ui/preferences.py:88
+msgid "Login"
+msgstr "Identifiant"
+
+#: ../mailanie/ui/preferences.py:91
+msgid "Password"
+msgstr "Mot de passe"
+
+#: ../mailanie/ui/preferences.py:94
+msgid "Sender Name"
+msgstr "Nom de l’expéditeur"
+
+#: ../mailanie/ui/preferences.py:97
+msgid "Sender Address"
+msgstr "Adresse de l’expéditeur"
+
+#: ../mailanie/ui/preferences.py:173
+msgid "Select Your Folder"
+msgstr "Choisissez votre dossier"
+
+#~ msgid "Mailanie Mailbox Browser"
+#~ msgstr "Explorateur de boîtes aux lettres Mailanie"

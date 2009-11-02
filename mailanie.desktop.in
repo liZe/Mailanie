@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Mailanie
+_GenericName=Mailbox Browser
+_Comment=Browse your Mailbox
+Exec=mailanie
+Terminal=false
+Type=Application
+Icon=mailanie.svg
+Categories=GTK;Application;Network;Email
