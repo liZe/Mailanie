@@ -153,11 +153,19 @@ class ReadMail(Mail, mail.ReadMail):
         headers = self.get_headers()
         subject = headers.get_header("Subject") or "[%s]" % _("Untitled")
         subject = subject.replace("&", "&amp;").replace("<", "&lt;")
-        address = headers.get_header("Address")
-        address = address[0] or address[1]
-        address = address.replace("&", "&amp;").replace("<", "&lt;")
-        self.header_label = gtk.Label("<big><b>%s</b></big>\n"%subject +
-                                      "<i>%s</i>"%address)
+        addresses = headers.get_header("Address")
+        addresses = [address[0] or address[1] for address in addresses]
+        addresses = [address.replace("&", "&amp;").replace("<", "&lt;")
+                     for address in addresses]
+        copies = headers.get_header("Copie")
+        copies = [address[0] or address[1] for address in copies]
+        copies = [address.replace("&", "&amp;").replace("<", "&lt;")
+                     for address in copies]
+        all_addresses = ", ".join(addresses) or _("Unknown")
+        if copies:
+            all_addresses += " (+ %s)" % ", ".join(copies)
+        self.header_label = gtk.Label("<big><b>%s</b></big>\n" % subject +
+                                      "<i>%s</i>" % all_addresses)
         self.header_label.props.ellipsize = pango.ELLIPSIZE_END
         self.header_label.set_alignment(0, 0.5)
         self.header_label.set_use_markup(True)

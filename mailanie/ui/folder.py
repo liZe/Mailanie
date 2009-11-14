@@ -126,7 +126,8 @@ class Folder(folder.Folder):
                 new_mail.get_header("Subject"),
                 new_mail.get_header("Address"),
                 new_mail.get_header("Date"),
-                new_mail.get_flags())
+                new_mail.get_flags(),
+                new_mail.get_header("Copie"))
             self._headers[i] = headers
             self.list_store.append((headers, ))
 
@@ -141,7 +142,8 @@ class Folder(folder.Folder):
     @staticmethod
     def _filter(model, iter, string):
         filter_string = u"\n".join((
-                u" ".join(model[iter][0].get_header("Address")),
+                u" ".join(
+                    " ".join(model[iter][0].get_header("Address"))),
                 model[iter][0].get_header("Subject"))).lower()
         return string.lower() in filter_string
 
@@ -184,7 +186,8 @@ class Folder(folder.Folder):
                     new_mail.get_header("Subject"),
                     new_mail.get_header("Address"),
                     new_mail.get_header("Date"),
-                    new_mail.get_flags())
+                    new_mail.get_flags(),
+                    new_mail.get_header("Copie"))
                 self._headers[i] = headers
                 new_mails.append(headers)
                 self.list_store.append((headers, ))
@@ -276,12 +279,20 @@ class Folder(folder.Folder):
         subject = model[iter][0].get_header("Subject") or "[%s]" % _("Untitled")
         subject = u" ".join(subject.split())
         subject = subject.replace("&", "&amp;").replace("<", "&lt;")
-        address = model[iter][0].get_header("Address")
-        address = address[0] or address[1]
-        address = address.replace("&", "&amp;").replace("<", "&lt;")
+        addresses = model[iter][0].get_header("Address")
+        addresses = [address[0] or address[1] for address in addresses]
+        addresses = [address.replace("&", "&amp;").replace("<", "&lt;")
+                     for address in addresses]
+        copies = model[iter][0].get_header("Copie")
+        copies = [address[0] or address[1] for address in copies]
+        copies = [address.replace("&", "&amp;").replace("<", "&lt;")
+                     for address in copies]
+        all_addresses = ", ".join(addresses) or _("Unknown")
+        if copies:
+            all_addresses += " (+ %s)" % ", ".join(copies)
         cell.set_property("markup",
                           "<big><b>%s</b></big>\n" % subject +
-                          "<i>%s</i>" % address)
+                          "<i>%s</i>" % all_addresses)
 
         if "T" in model[iter][0].get_flags():
             cell.set_property("foreground", "#AA0000")

@@ -27,10 +27,20 @@ def get_mail_headers(mail, key, flags, address_header):
     subject = decode_mail_header(mail, "Subject")
     date = email.utils.mktime_tz(
         email.utils.parsedate_tz(decode_mail_header(mail, "Date")))
-    address = email.utils.parseaddr(mail[address_header])
-    address = list(decode(string) for string in address)
 
-    return MailHeaders(key, subject, address, date, flags)
+    addresses = []
+    for address in mail.get_all(address_header, []):
+        for address_split in address.split(","):
+            address_parse = email.utils.parseaddr(address_split.strip())
+            addresses.append(list(decode(string) for string in address_parse))
+
+    copies = []
+    for copie in mail.get_all("Cc", []):
+        for copie_split in copie.split(","):
+            copie_parse = email.utils.parseaddr(copie_split.strip())
+            copies.append(list(decode(string) for string in copie_parse))
+
+    return MailHeaders(key, subject, addresses, date, flags, copies)
 
 def decode_mail_header(mail, header_key):
     header = mail[header_key]
@@ -47,12 +57,13 @@ def decode(string):
 
 
 class MailHeaders(object):
-    def __init__(self, key, subject, address, date, flags):
+    def __init__(self, key, subject, addresses, date, flags, copies):
         self._key = key
         self._subject = subject
-        self._address = address
+        self._address = addresses
         self._date = date
         self._flags = flags
+        self._copie = copies
         self._mail = None
 
     def get_mail(self, mailbox):
@@ -67,7 +78,7 @@ class MailHeaders(object):
         return self._key
 
     def get_header(self, name):
-        if name in ("Subject", "Address", "Date"):
+        if name in ("Subject", "Address", "Date", "Copie"):
             return getattr(self, "_%s" % name.lower())
 
     def get_info(self):
