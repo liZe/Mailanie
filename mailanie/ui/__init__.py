@@ -287,8 +287,8 @@ class MainWindow(gtk.Window):
                                  len(new_mails)) % (len(new_mails), box.label)
                 text = u"\n\n".join(
                     u"%s\n(%s)" % (new_mail.get_header("Subject"),
-                                   new_mail.get_header("Address")[0] or
-                                   new_mail.get_header("Address")[1])
+                                   ", ".join([header[0] or header[1] for header
+                                              in new_mail.get_header("Address")]))
                     for new_mail in new_mails)
                 pynotify.Notification(title, text, "emblem-mail").show()
 
