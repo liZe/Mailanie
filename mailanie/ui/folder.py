@@ -141,9 +141,10 @@ class Folder(folder.Folder):
 
     @staticmethod
     def _filter(model, iter, string):
-        filter_string = u"\n".join((
-                u" ".join(
-                    " ".join(model[iter][0].get_header("Address"))),
+        filter_string = u",".join((
+                u",".join([
+                        u",".join(address) for address
+                        in model[iter][0].get_header("Address")]),
                 model[iter][0].get_header("Subject"))).lower()
         return string.lower() in filter_string
 
