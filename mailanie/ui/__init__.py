@@ -151,7 +151,7 @@ class MainWindow(gtk.Window):
 
         self.connect("destroy", lambda widget: self.quit())
 
-        glib.timeout_add(3600000, self._update_mailbox)
+        glib.timeout_add(60000, self._update_mailbox)
 
         gtk.window_set_default_icon_from_file(
             os.path.join(os.path.dirname(__file__), "mailanie.svg"))
