@@ -16,6 +16,7 @@
 # along with Mailanie.  If not, see <http://www.gnu.org/licenses/>.
 
 import gtk
+import glib
 import os
 import pynotify
 
@@ -149,6 +150,8 @@ class MainWindow(gtk.Window):
         self.paned.add2(self.notebook)
 
         self.connect("destroy", lambda widget: self.quit())
+
+        glib.timeout_add(3600000, self._update_mailbox)
 
         gtk.window_set_default_icon_from_file(
             os.path.join(os.path.dirname(__file__), "mailanie.svg"))
@@ -291,6 +294,8 @@ class MainWindow(gtk.Window):
                                               in new_mail.get_header("Address")]))
                     for new_mail in new_mails)
                 pynotify.Notification(title, text, "emblem-mail").show()
+        else:
+            return True
 
     def _delete_trash_mails(self):
         for box in mailanie.mailbox.list_boxes():
