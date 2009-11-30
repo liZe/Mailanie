@@ -18,6 +18,7 @@ import pango
 import gio
 import os
 import email
+import mimetypes
 
 from mailanie import config, mail
 
@@ -337,7 +338,8 @@ class WriteMail(Mail, mail.WriteMail):
 class Part(object):
     def __init__(self, message, name, mimetype, coding, key):
         self.message = message
-        self.name = name or "[%s]" % _("Untitled")
+        extension = mimetypes.guess_extension(mimetype) or ""
+        self.name = name or _("Untitled") + extension
 
         part_folder = gio.File(config.get("path", "part"))
         path = part_folder.get_path()
