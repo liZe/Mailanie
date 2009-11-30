@@ -1,0 +1,5 @@
+*.pyc
+*.desktop
+build/*
+po/mo
+po/*.pot
