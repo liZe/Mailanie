@@ -21,15 +21,13 @@ import gettext
 import gtk
 import gio
 
-
-if "po" in os.listdir(os.path.dirname(__file__)):
-    local_po = os.path.join("po", "mo")
+parent_directory = os.path.dirname(os.path.dirname(__file__)) or os.path.pardir
+if "po" in os.listdir(parent_directory):
+    local_po = os.path.join(parent_directory, "po", "mo")
+    sys.path.insert(0, parent_directory)
 else:
     local_po = None
 gettext.install("mailanie", local_po, unicode=True, names=("ngettext", ))
-
-if "python" in sys.argv[0]:
-    sys.argv[0] = "mailanie"
 
 import mailanie.config
 
