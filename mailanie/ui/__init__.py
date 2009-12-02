@@ -293,6 +293,8 @@ class MainWindow(gtk.Window):
                                    ", ".join([header[0] or header[1] for header
                                               in new_mail.get_header("Address")]))
                     for new_mail in new_mails)
+                title = title.replace("&", "&amp;").replace("<", "&lt;")
+                text = text.replace("&", "&amp;").replace("<", "&lt;")
                 pynotify.Notification(title, text, "emblem-mail").show()
         else:
             return True
