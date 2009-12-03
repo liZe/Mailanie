@@ -25,8 +25,11 @@ import smtp
 
 def get_mail_headers(mail, key, flags, address_header):
     subject = decode_mail_header(mail, "Subject")
-    date = email.utils.mktime_tz(
-        email.utils.parsedate_tz(decode_mail_header(mail, "Date")))
+    try:
+        date = email.utils.mktime_tz(
+            email.utils.parsedate_tz(decode_mail_header(mail, "Date")))
+    except:
+        date = None
 
     addresses = []
     for address in mail.get_all(address_header, []):
