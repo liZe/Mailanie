@@ -339,7 +339,7 @@ class Part(object):
     def __init__(self, message, name, mimetype, coding, key):
         self.message = message
         extension = mimetypes.guess_extension(mimetype) or ""
-        self.name = name or _("Untitled") + extension
+        self.name = mail.decode(name) if name else _("Untitled") + extension
 
         part_folder = gio.File(config.get("path", "part"))
         path = part_folder.get_path()
