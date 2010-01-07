@@ -27,13 +27,16 @@ options = _config.options
 sections = _config.sections
 options = _config.options
 
-_path = os.path.join(os.path.expanduser("~"), ".config", "mailanie")
-_file = os.path.join(_path, "config")
+# TODO: use XDG folders
+# TODO: write this for odd non-POSIX systems
+_cache_path = os.path.join(os.path.expanduser("~"), ".cache", "mailanie")
+_config_path = os.path.join(os.path.expanduser("~"), ".config", "mailanie")
+_config_file = os.path.join(_config_path, "config")
 
 def write():
-    if not os.path.isdir(_path):
-        os.makedirs(_path)
-    with open(_file, "w") as fd:
+    if not os.path.isdir(_config_path):
+        os.makedirs(_config_path)
+    with open(_config_file, "w") as fd:
         _config.write(fd)
 
 def init():
@@ -45,10 +48,10 @@ def init():
             "size": "600 400",
             },
         "path": {
-            "mailbox": "file://%s" % os.path.join(_path, "mailbox"),
-            "folder": "file://%s" % os.path.join(_path, "folders"),
-            "part": "file://%s" % os.path.join(_path, "parts"),
-            "addressbook": "file://%s" % os.path.join(_path, "addressbook"),
+            "mailbox": "file://%s" % os.path.join(_config_path, "mailbox"),
+            "folder": "file://%s" % os.path.join(_cache_path, "folders"),
+            "part": "file://%s" % os.path.join(_cache_path, "parts"),
+            "addressbook": "file://%s" % os.path.join(_config_path, "addressbook"),
             },
         "mailbox": {
             "draft": "none",
@@ -70,4 +73,4 @@ def init():
         for key, value in values.iteritems():
             _config.set(section, key, value)
 
-    _config.read(_file)
+    _config.read(_config_file)

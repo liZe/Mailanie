@@ -53,6 +53,8 @@ _icons = {
     "clear": ("edit-clear", _("Clear")),
 }
 
+_updating_mailboxes = False
+
 class MainWindow(gtk.Window):
     _menu = """
     <ui>
@@ -283,21 +285,25 @@ class MainWindow(gtk.Window):
         self.notebook.remove(page.widget)
 
     def _update_mailbox(self):
-        for box in mailanie.mailbox.list_boxes():
-            new_mails = box.update()
-            if new_mails:
-                title = ngettext("%i new mail in %s", "%i new mails in %s",
-                                 len(new_mails)) % (len(new_mails), box.label)
-                text = u"\n\n".join(
-                    u"%s\n(%s)" % (new_mail.get_header("Subject"),
-                                   ", ".join([header[0] or header[1] for header
-                                              in new_mail.get_header("Address")]))
-                    for new_mail in new_mails)
-                title = title.replace("&", "&amp;").replace("<", "&lt;")
-                text = text.replace("&", "&amp;").replace("<", "&lt;")
-                pynotify.Notification(title, text, "emblem-mail").show()
-        else:
-            return True
+        global _updating_mailboxes
+        if not _updating_mailboxes:
+            _updating_mailboxes = True
+            for box in mailanie.mailbox.list_boxes():
+                new_mails = box.update()
+                if new_mails:
+                    title = ngettext("%i new mail in %s", "%i new mails in %s",
+                                     len(new_mails)) % (len(new_mails), box.label)
+                    text = u"\n\n".join(
+                        u"%s\n(%s)" % (new_mail.get_header("Subject"),
+                                       ", ".join([header[0] or header[1] for header
+                                                  in new_mail.get_header("Address")]))
+                        for new_mail in new_mails)
+                    title = title.replace("&", "&amp;").replace("<", "&lt;")
+                    text = text.replace("&", "&amp;").replace("<", "&lt;")
+                    pynotify.Notification(title, text, "emblem-mail").show()
+            else:
+                _updating_mailboxes = False
+                return True
 
     def _delete_trash_mails(self):
         for box in mailanie.mailbox.list_boxes():

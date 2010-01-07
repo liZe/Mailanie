@@ -36,6 +36,9 @@ for path in mailanie.config.options("path"):
     paths[path] = False
 
 def mount(folder, async, path):
+    if not folder.query_exists():
+        folder.make_directory_with_parents(gio.Cancellable())
+
     paths[path] = True
 
     if False not in paths.values():

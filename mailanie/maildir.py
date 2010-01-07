@@ -64,10 +64,10 @@ class MailBox(mailbox.Maildir, object):
         self._toc = {}
         for subdir in ("new", "cur"):
             subdir_path = os.path.join(self._path, subdir)
-            for entry in os.listdir(subdir_path):
-                # ERROR: do not verify if path is a folder
-                uniq = entry.split(self.colon)[0]
-                self._toc[uniq] = os.path.join(subdir, entry)
+            if os.path.isdir(subdir_path):
+                for entry in os.listdir(subdir_path):
+                    uniq = entry.split(self.colon)[0]
+                    self._toc[uniq] = os.path.join(subdir, entry)
 
     def iterkeys(self):
         self._refresh()
