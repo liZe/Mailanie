@@ -175,8 +175,8 @@ class FileChooserBox(gtk.HBox):
         self.button.set_action(gtk.FILE_CHOOSER_ACTION_SELECT_FOLDER)
         self.pack_end(self.button, expand=False)
         self.path = path
-        self.get_value = self.button.get_uri
-        self.set_value = self.button.select_uri
+        self.get_value = self.button.get_current_folder_uri
+        self.set_value = self.button.set_current_folder_uri
         self.type = mailanie.config.get
         options.append(self)
 
