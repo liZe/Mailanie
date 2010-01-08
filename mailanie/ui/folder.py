@@ -34,6 +34,8 @@ class Folder(folder.Folder):
     def __init__(self, mailbox, label):
         super(Folder, self).__init__(mailbox, label)
 
+        self.updating = False
+
         if label in self._labels:
             self.label = gtk.stock_lookup(label)[1]
             self.pixbuf = \
@@ -149,57 +151,63 @@ class Folder(folder.Folder):
         return string.lower() in filter_string
 
     def update(self):
-        update = super(Folder, self).update()
+        if not self.updating:
+            self.updating = True
+            update = super(Folder, self).update()
 
-        if not self._loaded or not update:
+            if not self._loaded or not update:
+                return []
+
+            self.progress.set_fraction(0)
+            self.progress.set_text(_("Loading %s") % self.label)
+            self.show_progress(True)
+
+            while gtk.events_pending():
+                gtk.main_iteration(False)
+
+            for progress in update:
+                self.progress.set_fraction(progress)
+                self.progress.set_text("%i %%" % (progress * 100))
+                while gtk.events_pending():
+                    gtk.main_iteration(False)
+                if progress == 1:
+                    self.show_progress(False)
+                    old_keys, new_keys = update.next()
+
+            old_iters = []
+            row_iter = self.list_store.get_iter_root()
+            while row_iter:
+                if self.list_store.get_value(row_iter, 0).get_key() in old_keys:
+                    old_iters.append(row_iter)
+                row_iter = self.list_store.iter_next(row_iter)
+            for iter in old_iters:
+                self.list_store.remove(iter)
+
+            new_mails = []
+            for i, new_mail in enumerate(self._headers):
+                if new_mail.get_key() in new_keys:
+                    headers = mail.MailHeaders(
+                        new_mail.get_key(),
+                        new_mail.get_header("Subject"),
+                        new_mail.get_header("Address"),
+                        new_mail.get_header("Date"),
+                        new_mail.get_flags(),
+                        new_mail.get_header("Copie"))
+                    self._headers[i] = headers
+                    new_mails.append(headers)
+                    self.list_store.append((headers, ))
+
+            if new_mails:
+                while gtk.events_pending():
+                    gtk.main_iteration(False)
+
+                self.list_view.scroll_to_point(0, 0)
+
+            self.updating = False
+
+            return new_mails
+        else:
             return []
-
-        self.progress.set_fraction(0)
-        self.progress.set_text(_("Loading %s") % self.label)
-        self.show_progress(True)
-
-        while gtk.events_pending():
-            gtk.main_iteration(False)
-
-        for progress in update:
-            self.progress.set_fraction(progress)
-            self.progress.set_text("%i %%" % (progress * 100))
-            while gtk.events_pending():
-                gtk.main_iteration(False)
-            if progress == 1:
-                self.show_progress(False)
-                old_keys, new_keys = update.next()
-
-        old_iters = []
-        row_iter = self.list_store.get_iter_root()
-        while row_iter:
-            if self.list_store.get_value(row_iter, 0).get_key() in old_keys:
-                old_iters.append(row_iter)
-            row_iter = self.list_store.iter_next(row_iter)
-        for iter in old_iters:
-            self.list_store.remove(iter)
-
-        new_mails = []
-        for i, new_mail in enumerate(self._headers):
-            if new_mail.get_key() in new_keys:
-                headers = mail.MailHeaders(
-                    new_mail.get_key(),
-                    new_mail.get_header("Subject"),
-                    new_mail.get_header("Address"),
-                    new_mail.get_header("Date"),
-                    new_mail.get_flags(),
-                    new_mail.get_header("Copie"))
-                self._headers[i] = headers
-                new_mails.append(headers)
-                self.list_store.append((headers, ))
-
-        if new_mails:
-            while gtk.events_pending():
-                gtk.main_iteration(False)
-
-            self.list_view.scroll_to_point(0, 0)
-
-        return new_mails
 
     def delete_trash_mails(self):
         delete = super(Folder, self).delete_trash_mails()
