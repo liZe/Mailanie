@@ -101,6 +101,10 @@ class Mail(mail.Mail):
             mimetype = part.get_content_type()
             message = part.get_payload(decode=True)
             name = part.get_filename()
+            if not name:
+                raw_name = part.get_param("name")
+                if raw_name:
+                    name = email.utils.collapse_rfc2231_value(raw_name)
 
             if message:
                 try:
